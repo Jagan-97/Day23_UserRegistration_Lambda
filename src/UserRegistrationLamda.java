@@ -48,6 +48,14 @@ public class UserRegistrationLamda {
             }
         };
 
+        UserRegistrationInterface password = (String pattern, String pwd) -> {
+            if (Pattern.matches(pattern, pwd)) {
+                return true;
+            }else {
+                return false;
+            }
+        };
+
         firstName.validate("^[A-Z][a-z]{2,}$", "Jagan");
         firstName.validate("^[A-Z][a-z]{2,}$", "jaga");
 
@@ -59,5 +67,8 @@ public class UserRegistrationLamda {
 
         mobileNumber.validate("[91]{2} [6-9]{1}[0-9]{9}", "91 9940698983");
         mobileNumber.validate("^[9][1]{0,1}\\s[0-9]{10}", "91 96568");
+
+        System.out.println("Entered value is " + password.validate("[A-Z][a-z0-9]{7,}[$&+,:;=?@#|'<>.-^*()%!]","Jagan0611@"));
+        System.out.println("Entered value is " + password.validate("[A-Z][a-z0-9]{7,}[$&+,:;=?@#|'<>.-^*()%!]","jaga6"));
     }
 }
